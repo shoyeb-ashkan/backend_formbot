@@ -9,7 +9,7 @@ const connectDB = async () => {
     });
 
     const connection = mongoose.connection;
-
+    console.log("Connected to MongoDB");
     // Event listeners
     connection.on("connected", () => {
       console.log("MongoDB connected successfully!");

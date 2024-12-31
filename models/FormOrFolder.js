@@ -2,12 +2,7 @@ const mongoose = require("mongoose");
 
 const ResponseSchema = new mongoose.Schema({
   submittedAt: { type: Date, default: Date.now },
-  answers: [
-    {
-      fieldId: { type: String, required: true },
-      answer: { type: mongoose.Schema.Types.Mixed, required: true },
-    },
-  ],
+  response: { type: Array },
 });
 
 const FolderOrFormSchema = new mongoose.Schema(

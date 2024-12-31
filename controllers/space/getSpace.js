@@ -15,6 +15,11 @@ const getSpace = async (req, res) => {
           options: { sort: { createdAt: -1 } },
           select: "-__v -updatedAt",
         },
+        populate: {
+          path: "responses",
+          options: { sort: { submittedAt: -1 } },
+          select: "-__v -updatedAt",
+        },
       });
 
     if (!getSpace) {

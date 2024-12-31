@@ -1,7 +1,7 @@
 const FormOrFolder = require("../../models/FormOrFolder");
 
 const saveFormResponses = async (req, res) => {
-  const formId = req.params.formId;
+  const { formId } = req.params;
   const { response, started } = req.body;
 
   try {
@@ -17,7 +17,7 @@ const saveFormResponses = async (req, res) => {
 
     if (response) {
       form.responses = form.responses || [];
-      form.responses.push(response);
+      form.responses.unshift({ response });
     }
 
     form.save();

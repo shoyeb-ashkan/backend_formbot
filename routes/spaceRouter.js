@@ -24,6 +24,6 @@ router.put(
 );
 
 router.get("/form/:formId", getFormData);
-router.put("/form/:formId/started", saveFormResponses);
+router.put("/form/:formId", saveFormResponses);
 
 module.exports = router;

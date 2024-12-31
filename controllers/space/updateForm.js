@@ -3,7 +3,6 @@ const FormOrFolder = require("../../models/FormOrFolder");
 const updateForm = async (req, res) => {
   const { data, name } = req.body;
   const { formId } = req.params;
-  console.log(name);
   try {
     const form = await FormOrFolder.findById(formId).select("-__v -updatedAt");
 

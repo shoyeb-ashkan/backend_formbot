@@ -1,4 +1,5 @@
 const User = require("../../models/User");
+const Space = require("../../models/Space");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
@@ -30,6 +31,10 @@ const updateUserDetails = async (req, res) => {
 
     if (name) {
       user.name = name;
+      await Space.findOneAndUpdate(
+        { owner: user._id },
+        { name: `${name}'s Space` }
+      );
     }
     if (email) {
       user.email = email;

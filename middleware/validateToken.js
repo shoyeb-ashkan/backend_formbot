@@ -9,6 +9,7 @@ const validateToken = async (req, res, next) => {
         .status(401)
         .json({ error: true, message: "Unauthorized access!" });
     }
+
     req.userId = user.id;
     next();
   } catch (error) {
