@@ -1,13 +1,22 @@
 const User = require("../../models/User");
 const Space = require("../../models/Space");
+const jwt = require("jsonwebtoken");
+
 const shareSpace = async (req, res) => {
   try {
     const { token } = req.query;
     const userId = req.userId;
 
     if (token) {
-      const access = req.access;
-      const spaceId = req.spaceId;
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+      const { spaceId, access } = decoded;
+      if (!spaceId || !access) {
+        return res.status(400).json({
+          error: true,
+          message: "Invalid token: Missing required claims",
+        });
+      }
 
       const space = await Space.findById(spaceId);
       if (!space) {
@@ -43,6 +52,7 @@ const shareSpace = async (req, res) => {
         message: `Access granted with ${access} permissions.`,
       });
     } else {
+      
       const { email, access, spaceId } = req.body;
       if (!email || !access || !spaceId) {
         return res.status(400).json({
@@ -53,7 +63,7 @@ const shareSpace = async (req, res) => {
 
       const user = await User.findOne({ email });
       if (!user) {
-        return res.status(400).json({ error: true, message: "User not found" });
+        return res.status(400).json({ error: true, message: "User does not exist" });
       }
 
       if (String(user._id) === String(userId)) {

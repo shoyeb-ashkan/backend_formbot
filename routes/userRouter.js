@@ -8,13 +8,12 @@ const validateUpdateInput = require("../middleware/user/validateUpdateInput");
 const updateUserDetails = require("../controllers/user/updateUserDetails");
 const generateInvite = require("../controllers/user/generateInvite");
 const ShareSpace = require("../controllers/user/shareSpace");
-const validateShareSpaceToken = require("../middleware/user/validateShareSpaceToken");
 
 router.post("/register", validateUser, registerUser);
 router.post("/login", validateUser, loginUser);
 router.get("/", validateToken, getUserDetails);
 router.put("/update", validateToken, validateUpdateInput, updateUserDetails);
 router.get("/generate-invite", validateToken, generateInvite);
-router.put("/sharespace", validateToken, validateShareSpaceToken, ShareSpace);
+router.put("/sharespace", validateToken, ShareSpace);
 
 module.exports = router;
