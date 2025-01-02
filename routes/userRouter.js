@@ -14,6 +14,6 @@ router.post("/login", validateUser, loginUser);
 router.get("/", validateToken, getUserDetails);
 router.put("/update", validateToken, validateUpdateInput, updateUserDetails);
 router.get("/generate-invite", validateToken, generateInvite);
-router.put("/sharespace", validateToken, ShareSpace);
+router.put("/sharespace", validateToken,validateUpdateInput, ShareSpace);
 
 module.exports = router;

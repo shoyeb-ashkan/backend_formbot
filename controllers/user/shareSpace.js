@@ -52,7 +52,6 @@ const shareSpace = async (req, res) => {
         message: `Access granted with ${access} permissions.`,
       });
     } else {
-      
       const { email, access, spaceId } = req.body;
       if (!email || !access || !spaceId) {
         return res.status(400).json({
@@ -63,7 +62,9 @@ const shareSpace = async (req, res) => {
 
       const user = await User.findOne({ email });
       if (!user) {
-        return res.status(400).json({ error: true, message: "User does not exist" });
+        return res
+          .status(400)
+          .json({ error: true, message: "User does not exist" });
       }
 
       if (String(user._id) === String(userId)) {
